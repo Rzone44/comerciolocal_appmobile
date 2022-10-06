@@ -1,0 +1,67 @@
+<ion-slides  
+#slides 
+(ionSlideWillChange)="runCheckForStateOfSlideshow()"
+(ionSlideDidChange)="runCheckForSlideIndex()"
+(ionSlideReachStart)="runSlideDidReachStart()"
+(ionSlideReachEnd)="runSlideDidReachEnd()"
+(ionSlideTransitionStart)="runSlideTransitionStart()"
+(ionSlideTransitionEnd)="runSlideTransitionEnd()"
+(ionSlideDrag)="runSlideDrag($event)"
+pager="true"
+[options]="autoPlay ? slideConfigAutoplay : slideConfig">
+
+    <!-- Iterate through slideDeck array and create individual slides -->
+    <ion-slide *ngFor="let slide of slideDeck; let i = index">
+        <span *ngIf="slide.enlace">
+            <img [src]="uri + slide.imagen" alt="" (click)="redirigir(slide.enlace)" />
+        </span>
+        <span *ngIf="!slide.enlace">
+            <img [src]="uri + slide.imagen" alt="" />
+        </span>
+        <p>{{ slide.titulo }}</p>
+    </ion-slide>
+</ion-slides>
+
+<ion-grid *ngIf="!hideControls">
+    <ion-row>
+      <ion-col size="2">
+
+        <!-- Previous slide button -->
+        <ion-button 
+          fill="clear" 
+          (click)="revertToPreviousSlide()"
+          [class.disabled]="disablePreviousSlideButton">
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+
+      <!-- Autoplay / stop play -->
+      <ion-col size="8">
+        <ion-button 
+          fill="clear" 
+          *ngIf="displayPlayButton" 
+          (click)="startAutoplay()">
+          <ion-icon slot="icon-only" name="play-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button 
+          fill="clear" 
+          *ngIf="displayStopButton" 
+          (click)="stopAutoplay()">
+          <ion-icon slot="icon-only" name="stop-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+
+      <!-- Next slide button -->
+      <ion-col size="2">
+        <ion-button
+          fill="clear" 
+          (click)="advanceToNextSlide()"
+          [class.disabled]="disableNextSlideButton">
+          <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>

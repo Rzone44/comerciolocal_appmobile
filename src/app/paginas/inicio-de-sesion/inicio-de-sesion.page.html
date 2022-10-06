@@ -1,0 +1,19 @@
+<app-cabecera titulo="Iniciar sesi&oacute;n"></app-cabecera>
+<ion-content>
+    <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input [(ngModel)]="usuario" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Contrase&ntilde;a</ion-label>
+        <ion-input [(ngModel)]="contrasena" type="password" required></ion-input>
+    </ion-item>
+
+    <ion-button class="ion-margin-top" type="submit" expand="block" color="primary" (click)="IniciarSesion()">
+        Iniciar sesi&oacute;n
+    </ion-button>
+
+    <ion-button color="dark" expand="block" fill="outline" [routerLink]="['/registro-de-usuario']">Registrase
+    </ion-button>
+</ion-content>

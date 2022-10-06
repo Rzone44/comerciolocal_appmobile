@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'inicio-de-sesion',
+    loadChildren: () => import('./paginas/inicio-de-sesion/inicio-de-sesion.module').then( m => m.InicioDeSesionPageModule)
+  },
+  {
+    path: 'registro-de-usuario',
+    loadChildren: () => import('./paginas/registro-de-usuario/registro-de-usuario.module').then( m => m.RegistroDeUsuarioPageModule)
+  },
 ];
 
 @NgModule({

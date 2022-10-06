@@ -1,20 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-cabecera titulo="Bienvenido"></app-cabecera>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="12" size-md="10" size-lg="8">
+        <!-- banner 1 -->
+          <app-img-slideshow 
+            [slideDeck]="ConfiguracionGlobal.banner_principal">
+            </app-img-slideshow>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="12" size-md="8" size-lg="8">
+        <!-- modulos -->
+        <app-modulo [modulos]="modulos"></app-modulo>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!-- banner 2 -->
+        <ion-col size="12" size-sm="12" size-md="10" size-lg="8">
+            <!-- banner 1 -->
+              <app-img-slideshow 
+                [autoPlay]="false" 
+                [slideDeck]="ConfiguracionGlobal.banner_secundario">
+                </app-img-slideshow>
+          </ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

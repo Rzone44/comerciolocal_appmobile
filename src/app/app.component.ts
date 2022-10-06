@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ERPApiService } from './servicios/erpapi.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+
+  constructor(
+    private api: ERPApiService
+  ) {
+  }
+
+  ngOnInit() {
+    console.log('AppComponent start');
+    this.api.callMethod('comercio_local.ws.ComercioLocalGlobalSettings').subscribe(res=>{
+      localStorage.setItem("ConfiguracionGeneral", JSON.stringify(res.message));
+    })
+  }
 }

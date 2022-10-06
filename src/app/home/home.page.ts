@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ERPApiService } from '../servicios/erpapi.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    private api: ERPApiService
+  ) {}
+
+  ConfiguracionGlobal = JSON.parse(localStorage.getItem("ConfiguracionGeneral"));
+  modulos = [];
+  
+  ngOnInit() {
+   
+    this.api.getDoctype('CL_Modulos', '"*"','[["estado","=","Activo"]]').subscribe(res=>{
+      this.modulos = res;
+    });
+  }
 
 }
