@@ -13,13 +13,16 @@ export class SesionService {
     usuario: string;
     contrasena: string;
     nombreDeUsuario: string;
+    perfil = {
+        user_image : undefined
+    };
     constructor(
         private api: ERPApiService
     ) { }
 
-    public async IniciarSesion(usuario: string, contrasena: string) {
+    public IniciarSesion(usuario: string, contrasena: string) {
         console.log('1 Se llama el metodo de inicio de sesion');
-        return await this.api.callMethod('login', { "usr": usuario, "pwd": contrasena }).pipe(
+        return this.api.callMethod('login', { "usr": usuario, "pwd": contrasena }).pipe(
             map( async (res: any) => {
                 this.activo = true;
                 this.nombreDeUsuario = res.full_name;
@@ -27,18 +30,25 @@ export class SesionService {
                 this.contrasena = contrasena;
                 if (res.message == "Logged In") {
                     console.log('2 Se comprueba si se inicio y se pide el token');
-                    let token_res = this.api.callMethod('comercio_local.ws.token', { 'account': usuario }).pipe(
-                        map( async (token: any) => {
+                    let token_res = await this.api.callMethod('comercio_local.ws.token', { 'account': usuario }).pipe(
+                        map(async (token: any) => {
                         console.log('3 Se recibe el token');
                         this.api_key = token.message.api_key;
                         this.api_secret = token.message.api_secret;
                         return true;
                     })).toPromise();
-                    return token_res;
+                    let user_res = await this.api.getDoctype('User', '"*"','[["name","=","'+usuario+'"]]').pipe(
+                        map( async (user: any) => {
+                        console.log('4 Se obtienen datos adicionales');
+                        this.perfil = user[0];                       
+                        return true;
+                    })).toPromise();
+                    // return token_res;
                 } else {
-                    return false;
+                    // return false;
                 }
+                return res;
             })
-        ).toPromise();        
+        );        
     }
 }

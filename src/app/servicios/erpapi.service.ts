@@ -57,4 +57,16 @@ export class ERPApiService {
             })
         )
     }
+
+    insertDoctype(doctype: string, data: any) {
+        return this.http.post(this.uri + '/api/resource/' + doctype, data).pipe(
+            map((res: any) => {
+                if (res.data != undefined) {
+                    return res.data;
+                } else {
+                    return res.message;
+                }
+            })
+        )
+    }
 }

@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { SesionService } from './../../servicios/sesion.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,8 @@ export class InicioDeSesionPage implements OnInit {
 
     constructor(
         private sesion: SesionService,
-        private router:Router
+        private router:Router,
+        private alertController: AlertController
     ) { }
 
     ngOnInit() {
@@ -24,12 +26,29 @@ export class InicioDeSesionPage implements OnInit {
 
     async IniciarSesion() {
         console.log('Iniciando sesion');
-        let SesionIniciada = await this.sesion.IniciarSesion(this.usuario, this.contrasena);
-        if (SesionIniciada) {
-            this.router.navigate(['/home']);
-        } else {
-            console.log('//TODO: alertar al usuario por que no se pudo iniciar sesion')
-        }
+        this.sesion.IniciarSesion(this.usuario, this.contrasena).subscribe({
+            next: res=>{
+                this.router.navigate(['/home']);
+            },
+            error: err=>{
+                console.log(err);
+                this.presentAlert('Sesión','',err.error.message,'ok', ()=>{});
+            }
+        });
     }
+
+    async presentAlert(_header, _subHeader, _message, _buttonText, handler=undefined) {
+        const alert = await this.alertController.create({
+          header: _header,
+          subHeader: _subHeader,
+          message: _message,
+          buttons: [{
+              text: _buttonText, 
+              handler: handler(),
+          }]
+        });
+    
+        await alert.present();
+      }
 
 }
