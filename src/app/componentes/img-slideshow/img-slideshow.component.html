@@ -13,7 +13,7 @@ pager="true"
     <!-- Iterate through slideDeck array and create individual slides -->
     <ion-slide *ngFor="let slide of slideDeck; let i = index">
         <span *ngIf="slide.enlace">
-            <img [src]="uri + slide.imagen" alt="" (click)="redirigir(slide.enlace)" />
+            <img [src]="uri + slide.imagen" alt="" [routerLink]="['/'+slide.enlace]" [queryParams]="{ html: slide.html, titulo: slide.titulo_html }" />
         </span>
         <span *ngIf="!slide.enlace">
             <img [src]="uri + slide.imagen" alt="" />

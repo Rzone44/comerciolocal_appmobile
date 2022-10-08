@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { AppModule } from 'src/app/app.module';
 
+// TODO: Cambiar slides por swiper --> https://swiperjs.com/angular
+
 @Component({
     selector: 'app-img-slideshow',
     templateUrl: './img-slideshow.component.html',
@@ -11,7 +13,7 @@ import { AppModule } from 'src/app/app.module';
 export class ImgSlideshowComponent implements OnInit {
 
     @ViewChild('slides') ionSlides: IonSlides;
-    @Input() slideDeck: Array<{ name: string, imagen: string, titulo: string, enlace: string}> = [];
+    @Input() slideDeck: Array<{ name: string, imagen: string, titulo: string, enlace: string, html:string, titulo_html:string}> = [];
     @Input() hideControls: Boolean = true; 
     @Input() autoPlay: Boolean = true; 
 

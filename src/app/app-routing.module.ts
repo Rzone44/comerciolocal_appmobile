@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'registro-de-usuario',
     loadChildren: () => import('./paginas/registro-de-usuario/registro-de-usuario.module').then( m => m.RegistroDeUsuarioPageModule)
   },
+  {
+    path: 'visor-html',
+    loadChildren: () => import('./paginas/visor-html/visor-html.module').then( m => m.VisorHtmlPageModule)
+  },
 ];
 
 @NgModule({
