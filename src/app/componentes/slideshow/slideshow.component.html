@@ -1,0 +1,18 @@
+<!-- TODO: Revisar la razón por qué no funciona el autoplay -->
+<swiper 
+    [spaceBetween]="30"
+    [centeredSlides]="true"
+    [autoplay]="{delay: 500 ,disableOnInteraction: false, pauseOnMouseEnter: false}"
+    [lazy]="true"
+    [loop]="true"
+    [pagination]="{dynamicBullets: true, clickable: true}" 
+    [navigation]="false"
+    class="mySwiper">
+        <ng-template swiperSlide><img data-src="https://source.unsplash.com/random/800x800/?img=1" alt="" class="swiper-lazy"></ng-template>
+        <ng-template swiperSlide><img data-src="https://source.unsplash.com/random/800x800/?img=2" alt="" class="swiper-lazy"></ng-template>
+</swiper>
+<!-- 
+    [direction]="'horizontal'" 
+    [loopFillGroupWithBlank]="true"
+   
+-->

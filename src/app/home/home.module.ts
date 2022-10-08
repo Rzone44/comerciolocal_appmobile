@@ -5,9 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { ModuloComponent } from '../componentes/modulo/modulo.component';
-import { BannerComponent } from '../componentes/banner/banner.component';
-import { ImgSlideshowComponent } from '../componentes/img-slideshow/img-slideshow.component';
 import { ComponentesModule } from '../componentes/componentes.module';
 
 @NgModule({
@@ -18,6 +15,6 @@ import { ComponentesModule } from '../componentes/componentes.module';
     HomePageRoutingModule,
     ComponentesModule
   ],
-  declarations: [HomePage, ModuloComponent, BannerComponent, ImgSlideshowComponent, ]
+  declarations: [HomePage,  ]
 })
 export class HomePageModule {}
