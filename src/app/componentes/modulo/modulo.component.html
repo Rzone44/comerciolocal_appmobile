@@ -1,7 +1,7 @@
 <ion-grid>
   <ion-row>
     <ion-col *ngFor="let modulo of modulos" size="4" size-sm="3" size-md="3" size-lg="2" class="modulo">
-      <img *ngIf="modulo.imagen" src="{{ uri }}{{ modulo.imagen }}" alt=""/>
+      <img *ngIf="modulo.imagen" src="{{ uri }}{{ modulo.imagen }}" alt="" [routerLink]="['/'+modulo.ruta]" [queryParams]="{json : modulo.parametros}"/>
       <img *ngIf="!modulo.imagen" src="{{ uri }}{{ ConfiguracionGlobal.imagen_predeterminada_modulo }}" alt=""/>
       <span>{{ modulo.titulo }}</span>
     </ion-col>

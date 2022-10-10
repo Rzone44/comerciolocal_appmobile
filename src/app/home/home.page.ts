@@ -17,7 +17,7 @@ export class HomePage {
   
   ngOnInit() {
    
-    this.api.getDoctype('CL_Modulos', '"*"','[["estado","=","Activo"]]').subscribe(res=>{
+    this.api.getList('CL_Modulos', '"*"','[["estado","=","Activo"],["modulo_padre","=",""]]').subscribe(res=>{
       this.modulos = res;
     });
   }

@@ -1,0 +1,17 @@
+<ion-grid>
+    <ion-row>
+        <ion-col *ngFor="let negocio of negocios" size="4" size-sm="3" size-md="3" size-lg="2" class="negocio">
+            <ion-card color="dark">
+                <img 
+                    *ngIf="negocio.logotipo"  alt=""
+                    src="{{ uri }}{{ negocio.logotipo }}"
+                    [routerLink]="['/negocio-portada']" [queryParams]="{negocio: negocio.name}" />
+                <img 
+                    *ngIf="!negocio.logotipo" alt="" 
+                    src="{{ uri }}{{ ConfiguracionGlobal.imagen_predeterminada_negocio }}"
+                    [routerLink]="['/negocio-portada']" [queryParams]="{negocio: negocio.name}" />
+            </ion-card>
+            <span>{{ negocio.nombre }}</span>
+        </ion-col>
+    </ion-row>
+</ion-grid>

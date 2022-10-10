@@ -41,7 +41,7 @@ export class ERPApiService {
      * @param filters '[["field1", "=", "value1"]]'
      * @returns 
      */
-    getDoctype(doctype: string, fields: string = '', filters: string = undefined) {
+    getList(doctype: string, fields: string = '', filters: string = undefined) {
 
         let url = (this.uri + '/api/resource/' + doctype) +
             (fields == '"*"' ? '?fields=["*"]' : '?fields=["name",' + fields + ']') +
@@ -57,6 +57,23 @@ export class ERPApiService {
             })
         )
     }
+
+    getDoctype(doctype: string, name: string = '') {
+
+        let url = this.uri + `/api/resource/${doctype}/${name}`;
+        console.log(url);
+        return this.http.get(url).pipe(
+            map((res: any) => {
+                if (res.data != undefined) {
+                    return res.data;
+                } else {
+                    return res.message;
+                }
+            })
+        )
+    }
+
+    
 
     insertDoctype(doctype: string, data: any) {
         return this.http.post(this.uri + '/api/resource/' + doctype, data).pipe(

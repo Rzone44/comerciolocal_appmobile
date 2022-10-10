@@ -1,18 +1,29 @@
-<!-- TODO: Revisar la razón por qué no funciona el autoplay -->
+<!-- TODO: Revisar la razón por qué no funciona el autoplay, por paramtro y ver la posibilidad de quitar el intervalo -->
 <swiper 
-    [spaceBetween]="30"
+    #swiper 
+    [spaceBetween]="5000"
     [centeredSlides]="true"
-    [autoplay]="{delay: 500 ,disableOnInteraction: false, pauseOnMouseEnter: false}"
+    [autoplay]="{delay: 4500 ,disableOnInteraction: false, pauseOnMouseEnter: false}"
+    [speed]="1500"
     [lazy]="true"
     [loop]="true"
-    [pagination]="{dynamicBullets: true, clickable: true}" 
     [navigation]="false"
+    [pagination]="{dynamicBullets: true, clickable: true}" 
+    [effect]="'fade'"
     class="mySwiper">
-        <ng-template swiperSlide><img data-src="https://source.unsplash.com/random/800x800/?img=1" alt="" class="swiper-lazy"></ng-template>
-        <ng-template swiperSlide><img data-src="https://source.unsplash.com/random/800x800/?img=2" alt="" class="swiper-lazy"></ng-template>
-</swiper>
+    <ng-template swiperSlide *ngFor="let slide of slideDeck; let i = index">
+        <!-- <img data-src="{{uri}}{{slide.imagen}}" alt=""> -->
+        <span *ngIf="slide.enlace">
+            <img data-src="{{uri}}{{slide.imagen}}"  class="swiper-lazy" alt="" [routerLink]="['/'+slide.enlace]" [queryParams]="{ html: slide.html, titulo: slide.titulo_html }" />
+        </span>
+        <span *ngIf="!slide.enlace">
+            <img data-src="{{uri}}{{slide.imagen}}"  class="swiper-lazy" alt="" />
+        </span>
+        <p>{{ slide.titulo }}</p>
+    </ng-template>
+    </swiper>
 <!-- 
+    [pagination]="{type: 'progressbar', progressbarOpposite: true}"
     [direction]="'horizontal'" 
     [loopFillGroupWithBlank]="true"
-   
 -->

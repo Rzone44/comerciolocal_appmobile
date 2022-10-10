@@ -23,6 +23,14 @@ const routes: Routes = [
     path: 'visor-html',
     loadChildren: () => import('./paginas/visor-html/visor-html.module').then( m => m.VisorHtmlPageModule)
   },
+  {
+    path: 'navegar-submodulos',
+    loadChildren: () => import('./paginas/navegar-submodulos/navegar-submodulos.module').then( m => m.NavegarSubmodulosPageModule)
+  },
+  {
+    path: 'negocio-portada',
+    loadChildren: () => import('./paginas/negocio-portada/negocio-portada.module').then( m => m.NegocioPortadaPageModule)
+  },
 ];
 
 @NgModule({

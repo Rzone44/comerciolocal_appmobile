@@ -1,3 +1,5 @@
+import { BarraDeProductosComponent } from './barra-de-productos/barra-de-productos.component';
+import { NegocioComponent } from './negocio/negocio.component';
 import { ModuloComponent } from './modulo/modulo.component';
 import { ImgSlideshowComponent } from './img-slideshow/img-slideshow.component';
 import { BannerComponent } from './banner/banner.component';
@@ -11,8 +13,8 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports:[IonicModule,  CommonModule, SwiperModule,RouterModule],
-    declarations: [CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent,], 
-    exports: [CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent,]
+    declarations: [CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent, NegocioComponent, BarraDeProductosComponent], 
+    exports: [CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent,NegocioComponent, BarraDeProductosComponent]
 })
 
 export class ComponentesModule{
