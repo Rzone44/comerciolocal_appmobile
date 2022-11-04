@@ -1,0 +1,119 @@
+<app-cabecera titulo="{{negocio.nombre}}"></app-cabecera>
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>{{negocio.nombre}}</ion-card-subtitle>
+            <ion-card-title> {{producto.nombre}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col size="12">
+                        <app-galeria-producto [producto]="producto"></app-galeria-producto>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12" id="Precio/Estrellas">
+                        <ion-row *ngIf="producto.tipo_de_producto == 'Con variantes'">
+                            <ion-col size="12">
+                                <!-- <ion-item>
+                                    <ion-label *ngIf="producto.variantes.length > 0">Variantes</ion-label>
+                                    <ion-select  *ngIf="producto.variantes.length > 0" [(ngModel)]="variante1" placeholder="">
+                                        <ion-select-option *ngFor="let v of producto.variantes"
+                                            value="{{v.codigo}}">{{v.atributos.atributo1_titulo }} {{ v.atributos.atributo1_valor}} {{v.atributos.atributo2_titulo }} {{ v.atributos.atributo2_valor}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item> -->
+                                <ion-item *ngIf="producto.valores_atributo1.length > 0"  color="light">
+                                    <ion-label >{{producto.atributo1}}</ion-label>
+                                    <ion-select [(ngModel)]="variante1" placeholder="" (ionChange)="verificarVariable($event)">
+                                        <ion-select-option *ngFor="let item of producto.valores_atributo1"
+                                            value="{{item.valor_variante}}">{{item.valor_variante}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item *ngIf="producto.valores_atributo2.length > 0" color="light">
+                                    <ion-label  >{{producto.atributo2}}</ion-label>
+                                    <ion-select [(ngModel)]="variante2" placeholder="" (ionChange)="verificarVariable($event)">
+                                        <ion-select-option *ngFor="let item of producto.valores_atributo2"
+                                        value="{{item.valor_variante}}">{{item.valor_variante}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item *ngIf="producto.valores_atributo3.length > 0" color="light">
+                                    <ion-label  >{{producto.atributo3}}</ion-label>
+                                    <ion-select [(ngModel)]="variante3" placeholder="" (ionChange)="verificarVariable($event)">
+                                        <ion-select-option *ngFor="let item of producto.valores_atributo3"
+                                        value="{{item.valor_variante}}">{{item.valor_variante}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item *ngIf="producto.valores_atributo4.length > 0" color="light">
+                                    <ion-label >{{producto.atributo4}}</ion-label>
+                                    <ion-select [(ngModel)]="variante4" placeholder="" (ionChange)="verificarVariable($event)">
+                                        <ion-select-option *ngFor="let item of producto.valores_atributo4"
+                                            value="{{item.valor_variante}}">{{item.valor_variante}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngIf="producto.activo == 1">
+                            <!--*ngIf="producto.tipo_de_producto == 'Simple'" -->
+                            <ion-col size="12">
+                                <ion-item  color="light">
+                                    <ion-label>{{precio | currency}}</ion-label>
+                                    <ion-label slot="end">TODO:Estrellas</ion-label>
+                                    <!-- TODO:Estrellas -->
+                                </ion-item>
+                                <ion-item color="light"
+                                    *ngIf="sePuedeComprar">
+                                    {{cantidadParaAgregar}}&nbsp;
+                                    <ion-select [(ngModel)]="uom" placeholder="uom">
+                                        <ion-select-option value="pieza">pieza</ion-select-option>
+                                    </ion-select>
+                                    <ion-buttons class="ion-justify-content-around ion-padding" slot="end">
+                                        <ion-button *ngIf="cantidadParaAgregar > 0" (click)="restarACarrito()" slot="start"
+                                            fill="solid" color="danger">
+                                            <ion-icon slot="icon-only" name="remove"></ion-icon>
+                                        </ion-button>
+                                        <ion-button *ngIf="producto.tipo_de_producto == 'Con variantes' ? variante.stockMaximo != cantidadParaAgregar : producto.stockMaximo != cantidadParaAgregar"
+                                            (click)="agregarACarrito()" slot="end" fill="solid" color="primary">
+                                            <ion-icon slot="icon-only" name="add"></ion-icon>
+                                        </ion-button>
+                                    </ion-buttons>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12" id="Descripcion">
+                        {{producto.descripcion}}
+                        <!-- {{producto.descripcion_html}} -->
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12" id="Resenas" >
+                        <ion-label color="primary">Reseñas de otros clientes</ion-label>
+
+                        <!-- TODO: Reseñas de  producto -->
+                        <ion-item class="clear">
+                            <ion-avatar slot="start">
+                                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                              </ion-avatar>
+                              <ion-label>
+                                <h3>Titulo</h3>
+                                <p>
+                                    <ion-icon color="warning" slot="start" name="star"></ion-icon>
+                                    <ion-icon color="warning" slot="start" name="star"></ion-icon>
+                                    <ion-icon color="warning" slot="start" name="star"></ion-icon>
+                                    <ion-icon color="warning" slot="start" name="star"></ion-icon>
+                                    <ion-icon color="warning" slot="start" name="star-half"></ion-icon>
+                                </p>
+                                <p>Descripcion</p>
+                              </ion-label>
+                        </ion-item>
+                        
+                    </ion-col>
+                </ion-row>
+            </ion-grid>            
+        </ion-card-content>
+    </ion-card>   
+</ion-content>
+<app-footer-carrito></app-footer-carrito>

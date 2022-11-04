@@ -1,7 +1,7 @@
 <ion-grid>
     <ion-row>
         <ion-col *ngFor="let negocio of negocios" size="4" size-sm="3" size-md="3" size-lg="2" class="negocio">
-            <ion-card color="dark">
+            <ion-card class="image-container">
                 <img 
                     *ngIf="negocio.logotipo"  alt=""
                     src="{{ uri }}{{ negocio.logotipo }}"

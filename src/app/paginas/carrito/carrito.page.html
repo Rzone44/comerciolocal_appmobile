@@ -1,0 +1,44 @@
+<app-cabecera titulo="Carrito"></app-cabecera>
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            <ion-item-group *ngFor="let negocio of negocios" color="dark">
+                <ion-item-divider class="ion-padding">
+                    <ion-label>{{negocio.Tienda}}</ion-label>
+                </ion-item-divider>
+                <ng-container *ngFor="let item of items">
+                    <ion-item *ngIf="item.Tienda == negocio.Tienda"  color="light">
+                        <ion-thumbnail slot="start">
+                            <img alt="Silhouette of a person's head"
+                                src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        </ion-thumbnail>
+                        <ion-label>
+                            <h3 class="ion-text-wrap" color="primary" (click)="editarProducto(item)">{{item.Cantidad}} {{item.Producto}}</h3>
+                            <h5 *ngIf="item.Variante" class="ion-text-wrap">
+                                <p><small *ngIf="item.Variante.atributo1_titulo">{{item.Variante.atributo1_titulo}}:
+                                        {{item.Variante.atributo1_valor}} </small></p>
+                                <p><small *ngIf="item.Variante.atributo2_titulo">{{item.Variante.atributo2_titulo}}:
+                                        {{item.Variante.atributo2_valor}} </small></p>
+                                <p><small *ngIf="item.Variante.atributo3_titulo">{{item.Variante.atributo3_titulo}}:
+                                        {{item.Variante.atributo3_valor}} </small></p>
+                                <p><small *ngIf="item.Variante.atributo4_titulo">{{item.Variante.atributo4_titulo}}:
+                                        {{item.Variante.atributo4_valor}} </small></p>
+                            </h5>
+                            <p>{{item.Precio | currency}} c/{{item.UOM}}</p>
+                        </ion-label>
+                        <ion-label slot="end">{{item.Cantidad * item.Precio | currency}}</ion-label>
+                    </ion-item>
+                </ng-container>
+            </ion-item-group>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<ion-footer >
+    <ion-toolbar>
+        <ion-buttons slot="primary" class="ion-padding">
+            <ion-button size="large" fill="solid">
+              Pagar
+            </ion-button>
+          </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

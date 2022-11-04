@@ -31,6 +31,18 @@ const routes: Routes = [
     path: 'negocio-portada',
     loadChildren: () => import('./paginas/negocio-portada/negocio-portada.module').then( m => m.NegocioPortadaPageModule)
   },
+  {
+    path: 'producto',
+    loadChildren: () => import('./paginas/producto/producto.module').then( m => m.ProductoPageModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./paginas/carrito/carrito.module').then( m => m.CarritoPageModule)
+  },
+  {
+    path: 'pantalla-vacia-para-refrescar',
+    loadChildren: () => import('./paginas/pantalla-vacia-para-refrescar/pantalla-vacia-para-refrescar.module').then( m => m.PantallaVaciaParaRefrescarPageModule)
+  },
 ];
 
 @NgModule({

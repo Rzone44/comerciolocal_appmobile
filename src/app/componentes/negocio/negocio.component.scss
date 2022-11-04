@@ -16,17 +16,24 @@
     align-items: center;
     align-content: space-between;
     flex-wrap: nowrap;
+
+    .image-container{
+        background: rgb(201, 201, 201);
+        width: 64px;
+        height: 64px;
+        overflow: hidden;
+    }
+
+    img{
+        width: 64px;
+        height: 64px;
+        display: block;
+        margin-bottom: 5px;;
+        border-radius: 10px;
+    }
+
+    span{
+        font-size: small;
+      }
+      
   }
-  
-  .negocio img{
-      width: 64px;
-      height: 64px;
-      display: block;
-      margin-bottom: 5px;;
-      border-radius: 10px;
-  }
-  
-  .negocio span{
-    font-size: small;
-  }
-  

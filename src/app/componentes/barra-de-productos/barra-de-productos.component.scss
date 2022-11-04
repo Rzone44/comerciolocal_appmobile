@@ -1,9 +1,11 @@
 @import "swiper/css";
 @import "swiper/css/bundle";
 
-.producto{
-    img {
-        width: 45vw;
+.barra_de_productos {
+    .producto {
+        padding-bottom: 35px;
+        img {
+            width: 45vw;
+        }
     }
 }
-

@@ -3,12 +3,16 @@
             <ion-label>{{barra.titulo}}</ion-label>
         </ion-item>
         <swiper 
-            [navigation]="true"
-            [slidesPerView]="2"
-            class="ion-padding"
+        [slidesPerView]="2"
+        [spaceBetween]="30"
+        [rewind]="true"
+        [pagination]="{
+          clickable: true
+        }"
+            class="ion-padding barra_de_productos"
         >
             <ng-template swiperSlide *ngFor="let producto of barra.productos">
-                <ion-grid fixed class="producto">
+                <ion-grid *ngIf="producto.activo == 1" fixed class="producto" (click)="goToProduct(producto)">
                     <ion-row>
                         <ion-col size="12">
                             <img *ngIf="producto.imagen" src="{{uri}}{{producto.imagen}}" alt="">
@@ -23,8 +27,7 @@
                     <ion-row>
                         <ion-col size="12"><ion-label>{{producto.precio | currency}}</ion-label></ion-col>
                     </ion-row>
-                </ion-grid>
-                
+                </ion-grid>                
             </ng-template>
         </swiper>
 </div>
