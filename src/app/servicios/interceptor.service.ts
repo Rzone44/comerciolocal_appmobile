@@ -21,9 +21,8 @@ export class InterceptorService implements HttpInterceptor {
       const key = AppModule.ERP_API_CLAVE;
       const secret = AppModule.ERP_API_SECRETO;
 
-      console.log(esSesionIniciada);
+      //console.log(esSesionIniciada);
       if(esSesionIniciada == null){
-        console.log('No se detecto una sesion iniciada, se usara cuenta de solo lectura');
         const headers = req.clone({
           headers: req.headers.set("Authorization", `token ${key}:${secret}`)
           .set("Content-Type","application/json")
@@ -32,7 +31,7 @@ export class InterceptorService implements HttpInterceptor {
         return next.handle(headers).pipe(
           map((event: HttpEvent<any>)=>{
             if (event instanceof HttpResponse) {
-              console.log(event)
+              //console.log(event)
             }
             return event;
           }),
@@ -44,16 +43,19 @@ export class InterceptorService implements HttpInterceptor {
               case 403: 
                 console.log('%c'+error.error._error_message, 'background: #222; color: red');
                 break;
+              case 500: 
+                console.log('%c'+error.message, 'background: #222; color: red');
+                break;
               default:
                   console.log('%c Se detecto un error no controlado en el interceptor HTTP.', 'background: #222; color:red');
                   break;
                 }
-            console.log(error);
+            console.log('%c '+error, 'background: #222; color:red');
             return throwError(error);
           })
         );
       }else{
-        console.log('Si se detecto una sesion iniciada, no se modificaran los headers');
+        //console.log('Si se detecto una sesion iniciada, no se modificaran los headers');
         return next.handle(req);
       }
   }

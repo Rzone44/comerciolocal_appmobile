@@ -2,38 +2,94 @@
 <ion-content>
     <ion-card>
         <ion-card-content>
-            <ion-item-group *ngFor="let negocio of negocios" color="dark">
+            <ion-chip color="primary" outline="true" *ngIf="negocios.length == 0">
+                <ion-icon name="cart"></ion-icon>
+                <ion-label>Sin productos en el carrito todav&iacute;a</ion-label>
+            </ion-chip>
+            
+           <ng-container *ngFor="let negocio of negocios">
                 <ion-item-divider class="ion-padding">
                     <ion-label>{{negocio.Tienda}}</ion-label>
                 </ion-item-divider>
-                <ng-container *ngFor="let item of items">
-                    <ion-item *ngIf="item.Tienda == negocio.Tienda"  color="light">
+                <ion-accordion-group *ngFor="let item of items; let i = index;">
+                    <ion-accordion *ngIf="item.Tienda == negocio.Tienda" toggleIconSlot="secondary">
+                      <ion-item slot="header" color="light">
                         <ion-thumbnail slot="start">
                             <img alt="Silhouette of a person's head"
-                                src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                src="{{ERP_API_URI + item.Imagen}}" />
                         </ion-thumbnail>
                         <ion-label>
-                            <h3 class="ion-text-wrap" color="primary" (click)="editarProducto(item)">{{item.Cantidad}} {{item.Producto}}</h3>
-                            <h5 *ngIf="item.Variante" class="ion-text-wrap">
-                                <p><small *ngIf="item.Variante.atributo1_titulo">{{item.Variante.atributo1_titulo}}:
-                                        {{item.Variante.atributo1_valor}} </small></p>
-                                <p><small *ngIf="item.Variante.atributo2_titulo">{{item.Variante.atributo2_titulo}}:
-                                        {{item.Variante.atributo2_valor}} </small></p>
-                                <p><small *ngIf="item.Variante.atributo3_titulo">{{item.Variante.atributo3_titulo}}:
-                                        {{item.Variante.atributo3_valor}} </small></p>
-                                <p><small *ngIf="item.Variante.atributo4_titulo">{{item.Variante.atributo4_titulo}}:
-                                        {{item.Variante.atributo4_valor}} </small></p>
-                            </h5>
-                            <p>{{item.Precio | currency}} c/{{item.UOM}}</p>
+                            <h3 class="ion-text-wrap" color="primary" >{{item.Cantidad}} {{item.Producto}}</h3>
+                            <p>{{item.PrecioUnitario | currency}} c/{{item.UOM}}</p>
                         </ion-label>
-                        <ion-label slot="end">{{item.Cantidad * item.Precio | currency}}</ion-label>
-                    </ion-item>
-                </ng-container>
-            </ion-item-group>
+                        <ion-label slot="end">{{item.Cantidad * item.PrecioUnitario | currency}}</ion-label>
+                      </ion-item>
+                      <div class="ion-padding" slot="content">
+
+                        <ion-grid fixed>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <ion-button (click)="eliminarProducto(item)" color="danger" size="small" fill="clear">
+                                        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                                        <!-- Eliminar -->
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-button (click)="menosUno(item)" color="warning" size="small" fill="clear">
+                                        <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+                                        <!-- Restar -->
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-button (click)="masUno(item)" color="secondary" size="small" fill="clear">
+                                        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+                                        <!-- Agregar -->
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-button (click)="editarProducto(item, i)" color="primary" size="small"  fill="clear">
+                                        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                                        <!-- Editar -->
+                                    </ion-button>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        
+                        <ion-grid fixed *ngIf="item.Configuracion">
+                            <ng-container *ngFor="let conf of item.Configuracion">
+                                <ion-row>
+                                    <ion-col size="6" class="ion-text-right">{{conf.atributo}}</ion-col>
+                                    <ion-col size="6">{{ ObtenerValorDeConfiguracion(conf) }}</ion-col>
+                                </ion-row>
+                            </ng-container>
+                        </ion-grid>
+              
+                        <ion-grid fixed *ngIf="item.Variante">
+                            <ion-row *ngIf="item.Variante.atributo1_titulo">
+                                <ion-col size="6" class="ion-text-right">{{item.Variante.atributo1_titulo}}</ion-col>
+                                <ion-col size="6">{{item.Variante.atributo1_valor}}</ion-col>
+                            </ion-row>
+                            <ion-row *ngIf="item.Variante.atributo2_titulo">
+                                <ion-col size="6" class="ion-text-right">{{item.Variante.atributo2_titulo}}</ion-col>
+                                <ion-col size="6">{{item.Variante.atributo2_valor}}</ion-col>
+                            </ion-row>
+                            <ion-row *ngIf="item.Variante.atributo3_titulo">
+                                <ion-col size="6" class="ion-text-right">{{item.Variante.atributo3_titulo}}</ion-col>
+                                <ion-col size="6">{{item.Variante.atributo3_valor}}</ion-col>
+                            </ion-row>
+                            <ion-row *ngIf="item.Variante.atributo4_titulo">
+                                <ion-col size="6" class="ion-text-right">{{item.Variante.atributo4_titulo}}</ion-col>
+                                <ion-col size="6">{{item.Variante.atributo4_valor}}</ion-col>
+                            </ion-row>
+                        </ion-grid>
+                      </div>
+                    </ion-accordion>
+                </ion-accordion-group>
+           </ng-container>
         </ion-card-content>
     </ion-card>
 </ion-content>
-<ion-footer >
+<ion-footer *ngIf="negocios.length > 0">
     <ion-toolbar>
         <ion-buttons slot="primary" class="ion-padding">
             <ion-button size="large" fill="solid">

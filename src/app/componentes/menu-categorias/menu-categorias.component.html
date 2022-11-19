@@ -1,0 +1,61 @@
+<div id="menu" [class]="class">
+    <ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>
+                <ion-toolbar>
+                    <ion-title>Categor&iacute;as</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="hide()">
+                            <ion-icon slot="start" name="close"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+                <ion-accordion-group [multiple]="true">
+                    <ng-container *ngFor="let c of CategoriasDeCategoriaPadre('')">
+                        <ion-accordion *ngIf="CategoriaTieneHijos(c.name)">
+                            <ion-item slot="header" color="light">
+                                <ion-label text-wrap>{{c.categoria}}</ion-label>
+                            </ion-item>
+                            <div class="ion-padding-start" slot="content">
+                                <ng-container *ngFor="let c2 of CategoriasDeCategoriaPadre(c.name)">
+                                    <ion-accordion *ngIf="CategoriaTieneHijos(c2.name)">
+                                        <ion-item slot="header" color="light">
+                                            <ion-label text-wrap>{{c2.categoria}}</ion-label>
+                                        </ion-item>
+                                        <div class="ion-padding-start" slot="content">
+                                            <ion-list>
+                                                <ion-item *ngFor="let c3 of CategoriasDeCategoriaPadre(c2.name)"
+                                                    color="light">
+                                                    <ion-label (click)="hide()" text-wrap
+                                                        [routerLink]="['/navegar-categoria']"
+                                                        [queryParams]="{categoria: c3.name, negocio: c2.negocio}">
+                                                        {{c3.categoria}}</ion-label>
+                                                </ion-item>
+                                            </ion-list>
+                                        </div>
+                                    </ion-accordion>
+                                    <ion-list>
+                                        <ion-item *ngIf="!CategoriaTieneHijos(c2.name)" color="light">
+                                            <ion-label (click)="hide()" text-wrap [routerLink]="['/navegar-categoria']"
+                                                [queryParams]="{categoria: c2.name, negocio: c2.negocio}">
+                                                {{c2.categoria}}
+                                            </ion-label>
+                                        </ion-item>
+                                    </ion-list>
+                                </ng-container>
+                            </div>
+                        </ion-accordion>
+                        <ion-item *ngIf="!CategoriaTieneHijos(c.name)" color="light">
+                            <ion-label (click)="hide()" text-wrap [routerLink]="['/navegar-categoria']"
+                                [queryParams]="{categoria: c.name, negocio: c.negocio}">{{c.categoria}}</ion-label>
+                        </ion-item>
+                    </ng-container>
+                </ion-accordion-group>
+            </ion-card-content>
+        </ion-card>
+    </ion-content>
+</div>

@@ -41,19 +41,10 @@ export class BarraDeProductosComponent implements OnInit {
                             if (producto.activo == 1) {
                                 barra.productos.push(producto);
                             }
-                            // console.log('producto', producto);
                         });
                     });
                 });
             });
-            // console.log('negocio-portada', res);
         });
     }
-
-    goToProduct(product) {
-        localStorage.setItem("producto", JSON.stringify(product));
-        localStorage.setItem("negocio", JSON.stringify(this.negocio));
-        this.router.navigate(['/producto']);
-    }
-
 }

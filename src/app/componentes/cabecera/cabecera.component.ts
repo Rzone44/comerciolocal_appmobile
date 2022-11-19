@@ -1,8 +1,10 @@
+import { NavegacionService } from './../../servicios/navegacion.service';
 import { Router } from '@angular/router';
 import { SesionService } from './../../servicios/sesion.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
 import { AppModule } from 'src/app/app.module';
+
 
 @Component({
     selector: 'app-cabecera',
@@ -14,7 +16,7 @@ export class CabeceraComponent implements OnInit {
     constructor(
         public router: Router,
         public sesion: SesionService,
-        private location: Location
+        private navegador: NavegacionService
     ) { }
 
     @Input() titulo: string = '';
@@ -24,15 +26,13 @@ export class CabeceraComponent implements OnInit {
     }
 
     irAInicioDeSesion() {
-        console.log('redirigir a login');
         this.router.navigate(['/inicio-de-sesion']);
     }
 
     irAPerfil() {
-        console.log('redirigir a login');
         this.router.navigate(['/perfil']);
     }
     regresar() {
-        this.location.back();
+        this.navegador.back()
     }
 }

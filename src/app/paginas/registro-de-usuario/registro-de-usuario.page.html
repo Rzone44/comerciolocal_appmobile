@@ -1,32 +1,44 @@
 <app-cabecera titulo="Registro"></app-cabecera>
 <ion-content>
-    <ion-list>
-            <ion-item>
-                <ion-label position="floating">Correo electrónico</ion-label>
-                <ion-input [(ngModel)]="correo" type="text" required></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Contrase&ntilde;a</ion-label>
-                <ion-input [(ngModel)]="contrasena" type="password" required></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Comprobar Contrase&ntilde;a</ion-label>
-                <ion-input [(ngModel)]="comprobar_contrasena" type="password" required></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Nombre(s)</ion-label>
-                <ion-input [(ngModel)]="nombre" type="text" required></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Apellido(s)</ion-label>
-                <ion-input [(ngModel)]="apellidos" type="text" required></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Nº Móvil</ion-label>
-                <ion-input [(ngModel)]="movil" type="text" required></ion-input>
-            </ion-item>
-        <ion-button class="ion-margin-top" type="submit" expand="block" color="primary" (click)="registroDeUsuario()">
-            ¡Quiero registrarme!
-        </ion-button>
-    </ion-list>
+    <ion-card>
+        <ion-card-content>
+
+            <ion-list>
+                <ion-item>
+                    <ion-label position="floating" >Correo electrónico</ion-label>
+                    <ion-input [(ngModel)]="correo" pattern="email" type="email" required ></ion-input>
+                </ion-item>
+                <ion-item *ngIf="correoInvalido">
+                    <ion-text color="danger">El formato de correo no es valido.</ion-text>
+                  </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Contrase&ntilde;a</ion-label>
+                    <ion-input [(ngModel)]="contrasena" type="password" required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Comprobar Contrase&ntilde;a</ion-label>
+                    <ion-input [(ngModel)]="comprobar_contrasena" type="password" required></ion-input>
+                </ion-item>
+                <ion-item *ngIf="correoInvalido">
+                    <ion-text color="danger">Se espera que las contraseñas sean iguales.</ion-text>
+                  </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Nombre(s)</ion-label>
+                    <ion-input [(ngModel)]="nombre" type="text" required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Apellido(s)</ion-label>
+                    <ion-input [(ngModel)]="apellidos" type="text" required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Nº Móvil</ion-label>
+                    <ion-input [(ngModel)]="movil" pattern="tel" type="tel" required></ion-input>
+                </ion-item>
+                <ion-button class="ion-margin-top" type="submit" expand="block" color="primary" [disabled]="puedeRegistrarse"
+                    (click)="registroDeUsuario()">
+                    ¡Quiero registrarme!
+                </ion-button>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

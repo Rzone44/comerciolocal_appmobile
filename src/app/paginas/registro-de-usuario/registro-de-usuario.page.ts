@@ -16,6 +16,11 @@ export class RegistroDeUsuarioPage implements OnInit {
     nombre: string                            // = 'ricardo'
     apellidos: string                         // = 'ramos gonzalez'    
     movil: string                             // = '3335071487'
+
+    correoInvalido: any = undefined;
+    contrasenasNoCoinciden: any = undefined;
+    puedeRegistrarse: boolean = false;
+
     constructor(
         private api: ERPApiService,
         private alertController: AlertController,
@@ -38,7 +43,6 @@ export class RegistroDeUsuarioPage implements OnInit {
                 this.presentAlert('Bienvenido','Gracias por registrarte', 'Ya puedes iniciar sesion con tu correo electrónico y contraseña.', 'Iniciar sesion',()=>{
                     this.router.navigate(['inicio-de-sesion']);
                 });
-                console.log(arg);
             }, error: err =>{
                 let MensajeDeError=JSON.parse(JSON.parse(err.error._server_messages)[0]).message
                 this.presentAlert('Error','No fue posible realizar el registro', MensajeDeError, 'Regresar al formulario', ()=>{});
@@ -60,5 +64,11 @@ export class RegistroDeUsuarioPage implements OnInit {
         });
     
         await alert.present();
+      }
+
+      revisarCorreo() {
+          const expression: RegExp = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
+          const email: string = 'john@gmail.com';
+          const result: boolean = expression.test(this.correo);
       }
 }

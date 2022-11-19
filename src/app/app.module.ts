@@ -22,7 +22,8 @@ import { SwiperModule } from 'swiper/angular';
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  public static ERP_API_URI = "http://192.168.247.155:8000";
+  public static ERP_API_URI = //"http://192.168.0.31:8183";
+                            "http://192.168.247.155:8000";
   public static ERP_API_CLAVE = "6b36fa06281ff9f";
   public static ERP_API_SECRETO = "0738a10d2ea12d4";
 /*

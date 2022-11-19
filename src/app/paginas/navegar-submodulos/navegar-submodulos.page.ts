@@ -8,55 +8,54 @@ import { ERPApiService } from 'src/app/servicios/erpapi.service';
     styleUrls: ['./navegar-submodulos.page.scss'],
 })
 export class NavegarSubmodulosPage implements OnInit {
-    modulo: any ={
-        banner_principal : [],
-        banner_secundario : []
-    };
+    modulo: any;
     modulo_name: any;
-    submodulos = [];
-    negocios = [];
+    submodulos: any;
+    negocios: any = undefined;
 
     constructor(
         private api: ERPApiService,
-        private activatedRoute: ActivatedRoute
-    ) { }
+        private activatedRoute: ActivatedRoute,
+    ) { 
+        this.negocios = undefined;
+    }
 
 
     ngOnInit() {
         this.activatedRoute.queryParams.subscribe(async params => {
-            if (params.json){
+            if (params.json) {
                 this.modulo_name = JSON.parse(params.json).modulo;
-                console.log("Navegando en "+this.modulo_name);
                 /* OBTENER SUBMODULO */
                 this.api.getList('CL_Modulos',
-                '"*"',
-                '[["estado","=","Activo"],["modulo_padre","=","' + this.modulo_name + '"]]').subscribe(res => {
-                    this.submodulos = res.length == 0 ? [] : res;
-                    console.log(res);
+                    '"*"',
+                    '[["estado","=","Activo"],["modulo_padre","=","' + encodeURIComponent(this.modulo_name) + '"]]').subscribe(res => {
+                        this.submodulos = res.length == 0 ? [] : res;
+                    });
+                /* OBTENER CONFIGURACION DEL MODULO ACTUAL */
+                this.api.getDoctype('CL_Modulos', this.modulo_name).subscribe(res => {
+                    this.modulo = res;
+                    /* OBTENER NEGOCIOS */
+                    let giros = '';
+                    res.giros_comerciales.forEach(g => {
+                        giros += '["CL_Negocio_Giros","tipo_de_producto_ofrecido", "=", "' + encodeURIComponent(g.girocomercial) + '"],';
+                    });
+                    if (giros != '') {
+                        this.api.getList(
+                            'CL_Negocio',
+                            '"*"',
+                            `[["CL_Negocio","docstatus", "=", "0"]]`,
+                            `[${giros.substring(0, giros.length - 1)}]`
+                        ).subscribe(res => {
+                            this.negocios = res.length == 0 ? [] : res;
+                        });
+                    }else{
+                        this.negocios = undefined;
+                    }
                 });
-
-                 /* OBTENER CONFIGURACION DEL MODULO ACTUAL */
-                 this.modulo = await this.api.getDoctype('CL_Modulos',this.modulo_name).pipe(res => {
-                    return res;
-                }).toPromise();
-
-                /* OBTENER NEGOCIOS */
-                //TODO: amarrar giros y modulos o comercios y modulos 
-                this.api.getList('CL_Negocio',
-                '"*"',
-                `[\
-                    ["CL_Negocio","docstatus", "=", "0"],\
-                    ["CL_Negocio_Giros","tipo_de_producto_ofrecido", "=", "${this.modulo.titulo}"]\
-                ]`).subscribe(res => {
-                    this.negocios = res.length == 0 ? [] : res;
-                    console.log(res);
-                });
-
-                
-               
             }
         });
-       
+
     }
+
 
 }

@@ -1,5 +1,14 @@
 <ion-app>
-    <ion-router-outlet>
-
+    <ion-card *ngIf="!conexionConServidor">
+        <img src="assets/images/misc/desconectado.png" alt="">
+        <ion-card-header>
+            <ion-card-subtitle>Comercio Local</ion-card-subtitle>
+            <ion-card-title>Problemas de conexión</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            No se puede establecer conexión con el servidor, por favor espera.
+        </ion-card-content>
+    </ion-card>
+    <ion-router-outlet *ngIf="conexionConServidor">
     </ion-router-outlet>
 </ion-app>

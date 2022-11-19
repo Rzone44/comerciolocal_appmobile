@@ -1,0 +1,28 @@
+<ng-container *ngIf="negocio!=undefined">
+    <app-menu-categorias idNegocio="{{negocio}}" menuId="negocio-categoria"></app-menu-categorias>
+    <app-cabecera titulo="{{negocio}}" *ngIf="negocio != undefined"></app-cabecera>
+    <ion-content id="main-content">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="6" *ngFor="let producto of productos">
+                    <ion-card *ngIf="producto.activo == 1" fixed class="producto" [routerLink]="['/producto']"
+                        [queryParams]="{idProducto : producto.name}" routerLinkActive="router-link-active">
+                        <img *ngIf="producto.imagen" src="{{uri}}{{producto.imagen}}" alt="">
+                        <img *ngIf="!producto.imagen" src="assets/images/default/multiproposito.png" alt="">
+                        <ion-card-header>
+                            <ion-label color="primary">
+                                <h2>{{producto.nombre}}</h2>
+                            </ion-label>
+                            <ion-card-subtitle class="ion-padding-top">{{producto.precio | currency}}
+                            </ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content>
+                            {{producto.descripcion}}
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-content>
+    <app-footer-carrito #menuToggle negocioActual="{{negocio.nombre}}" menuId="negocio-categoria"></app-footer-carrito>
+</ng-container>

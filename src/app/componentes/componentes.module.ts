@@ -1,3 +1,4 @@
+import { MenuCategoriasComponent } from './menu-categorias/menu-categorias.component';
 import { FooterCarritoComponent } from './footer-carrito/footer-carrito.component';
 import { GaleriaProductoComponent } from './galeria-producto/galeria-producto.component';
 import { BarraDeProductosComponent } from './barra-de-productos/barra-de-productos.component';
@@ -13,11 +14,16 @@ import { IonicModule } from '@ionic/angular';
 import { SwiperModule } from 'swiper/angular';
 import { RouterModule } from '@angular/router';
 import { ActivoPipe } from '../pipes/activo.pipe';
+import { ProductoComponent } from './producto/producto.component';
 
 @NgModule({
     imports:[IonicModule,  CommonModule, SwiperModule,RouterModule],
-    declarations: [ActivoPipe,CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent, NegocioComponent, BarraDeProductosComponent, GaleriaProductoComponent, FooterCarritoComponent], 
-    exports: [ActivoPipe,CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent,NegocioComponent, BarraDeProductosComponent, GaleriaProductoComponent, FooterCarritoComponent]
+    declarations: [ActivoPipe,CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent, 
+        NegocioComponent, BarraDeProductosComponent, GaleriaProductoComponent, FooterCarritoComponent, MenuCategoriasComponent,
+        ProductoComponent], 
+    exports: [ActivoPipe,CabeceraComponent, SlideshowComponent, BannerComponent, ImgSlideshowComponent, ModuloComponent,NegocioComponent,
+         BarraDeProductosComponent, GaleriaProductoComponent, FooterCarritoComponent, MenuCategoriasComponent,
+         ProductoComponent]
 })
 
 export class ComponentesModule{

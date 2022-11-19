@@ -33,3 +33,11 @@ ion-item.clear{
     --background: none !important;
     
 }
+
+button.ion-text-wrap{
+    display: contents !important;
+    .alert-radio-label.sc-ion-alert-md,
+    .alert-radio-label.sc-ion-alert-ios {
+        white-space: normal;
+    }
+}

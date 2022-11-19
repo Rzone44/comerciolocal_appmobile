@@ -35,10 +35,9 @@ export class SlideshowComponent implements OnInit {
             }else{
                 console.log('Swiper no ha iniciado');
             }
-        },500)
+        },500);
     }
     ngAfterViewInit(){
-        // console.log('ngAfterViewInit', this.swiper, this.autoPlay);
         // if (this.autoPlay) {
         //     this.swiper.swiperRef.autoplay.start();
         // } 

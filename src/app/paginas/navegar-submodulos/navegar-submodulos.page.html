@@ -1,35 +1,32 @@
-<app-cabecera titulo="{{modulo.titulo}}"></app-cabecera>
-<ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-sm="12" size-md="10" size-lg="8">
-        <!-- banner 1 -->
-          <app-slideshow 
-            [autoPlay]="true" 
-            [slideDeck]="modulo.banner_principal"
-            >
-            </app-slideshow>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-sm="12" size-md="8" size-lg="8">
-        <!-- modulos -->
-        <app-modulo [modulos]="submodulos"></app-modulo>
-        <app-negocio [negocios]="negocios"></app-negocio>
+<ng-container *ngIf="modulo != undefined">
+    <app-cabecera titulo="{{modulo.titulo}}"></app-cabecera>
+    <ion-content [fullscreen]="true">
+        <ion-grid>
+            <ion-row class="ion-justify-content-center">
+                <ion-col size="12" size-sm="12" size-md="10" size-lg="8">
+                    <!-- banner 1 -->
+                    <app-slideshow [autoPlay]="true" [slideDeck]="modulo.banner_principal">
+                    </app-slideshow>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+                <ion-col size="12" size-sm="12" size-md="8" size-lg="8">
+                    <!-- modulos -->
+                    <app-modulo [modulos]="submodulos"></app-modulo>
+                    <app-negocio [negocios]="negocios"></app-negocio>
 
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <!-- banner 2 -->
-        <ion-col size="12" size-sm="12" size-md="10" size-lg="8">
-            <!-- banner 1 -->
-              <app-slideshow 
-                [autoPlay]="false" 
-                [slideDeck]="modulo.banner_secundario">
-                </app-slideshow>
-          </ion-col>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <!-- banner 2 -->
+                    <ion-col size="12" size-sm="12" size-md="10" size-lg="8">
+                        <!-- banner 1 -->
+                        <app-slideshow [autoPlay]="false" [slideDeck]="modulo.banner_secundario">
+                        </app-slideshow>
+                    </ion-col>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-content>
+</ng-container>

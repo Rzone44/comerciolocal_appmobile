@@ -2,10 +2,16 @@
 @import "swiper/css/bundle";
 
 .barra_de_productos {
-    .producto {
-        padding-bottom: 35px;
-        img {
-            width: 45vw;
+    app-producto {
+        height: 100%;
+        ion-card{
+        height: 100%;
+        .producto {
+            padding-bottom: 35px;
+            img {
+                width: 45vw;
+            }
         }
+    }
     }
 }

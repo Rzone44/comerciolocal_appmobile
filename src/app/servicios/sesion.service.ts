@@ -37,7 +37,7 @@ export class SesionService {
                         this.api_secret = token.message.api_secret;
                         return true;
                     })).toPromise();
-                    let user_res = await this.api.getList('User', '"*"','[["name","=","'+usuario+'"]]').pipe(
+                    let user_res = await this.api.getList('User', '"*"','[["name","=","'+encodeURIComponent(usuario)+'"]]').pipe(
                         map( async (user: any) => {
                         console.log('4 Se obtienen datos adicionales');
                         this.perfil = user[0];                       

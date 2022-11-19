@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'inicio-de-sesion',
     loadChildren: () => import('./paginas/inicio-de-sesion/inicio-de-sesion.module').then( m => m.InicioDeSesionPageModule)
-  },
+  },  
   {
     path: 'registro-de-usuario',
     loadChildren: () => import('./paginas/registro-de-usuario/registro-de-usuario.module').then( m => m.RegistroDeUsuarioPageModule)
@@ -42,6 +42,14 @@ const routes: Routes = [
   {
     path: 'pantalla-vacia-para-refrescar',
     loadChildren: () => import('./paginas/pantalla-vacia-para-refrescar/pantalla-vacia-para-refrescar.module').then( m => m.PantallaVaciaParaRefrescarPageModule)
+  },
+  {
+    path: 'producto-editar',
+    loadChildren: () => import('./paginas/producto-editar/producto-editar.module').then( m => m.ProductoEditarPageModule)
+  },
+  {
+    path: 'navegar-categoria',
+    loadChildren: () => import('./paginas/navegar-categoria/navegar-categoria.module').then( m => m.NavegarCategoriaPageModule)
   },
 ];
 

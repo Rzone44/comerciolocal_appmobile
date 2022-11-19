@@ -1,0 +1,13 @@
+<ion-card *ngIf="producto.activo == 1" fixed class="producto" [routerLink]="['/producto']" [queryParams]="{idProducto : producto.name}" routerLinkActive="router-link-active">
+    <img *ngIf="producto.imagen" src="{{uri}}{{producto.imagen}}" alt="">
+    <img *ngIf="!producto.imagen" src="assets/images/default/multiproposito.png" alt="">
+    <ion-card-header>
+        <ion-label color="primary">
+            <h2>{{producto.nombre}}</h2>
+        </ion-label>
+        <ion-card-subtitle class="ion-padding-top">{{producto.precio | currency}}</ion-card-subtitle>
+    </ion-card-header>
+    <!-- <ion-card-content>
+        {{producto.descripcion}}
+    </ion-card-content> -->
+</ion-card>

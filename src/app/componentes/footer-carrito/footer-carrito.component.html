@@ -1,5 +1,21 @@
-<ion-footer class="ion-padding">
-    <ion-tab-button (click)="revisarCarrito()">
-        <ion-icon name="cart"></ion-icon>
-    </ion-tab-button>
+<ion-footer color="secondary">
+    <div class="btn-group">
+        <span (click)="irAInicio()" width-100>
+            <ion-icon slot="start" name="home"></ion-icon>
+            <ion-label>Portada</ion-label>                    
+        </span>
+        <span (click)="irAInicioDeNegocio(negocioActual)">
+            <ion-icon slot="start" name="pricetag"></ion-icon>
+            <ion-label>Tienda</ion-label> 
+        </span>
+        <span (click)="mostrarCategorias()">
+            <ion-icon slot="start" name="menu"></ion-icon>
+            <ion-label>Categor&iacute;as</ion-label> 
+        </span> 
+        <span (click)="revisarCarrito()">
+            <ion-icon slot="start" name="cart" ></ion-icon>
+            <ion-label>Carrito</ion-label> 
+            <span class="badge">{{TotalProductosEnCarrito}}</span>
+        </span>
+    </div>               
 </ion-footer>

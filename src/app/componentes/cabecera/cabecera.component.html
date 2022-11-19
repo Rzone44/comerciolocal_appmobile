@@ -1,7 +1,9 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button *ngIf="this.router.url != '/home'" default-href="#" (click)="regresar()" text=""></ion-back-button>
+            <ion-button *ngIf="this.router.url != '/home'" default-href="#" (click)="regresar()" text="">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
         </ion-buttons>
         <ion-title>{{titulo}}</ion-title>
         <ion-buttons slot="end">
